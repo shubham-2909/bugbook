@@ -15,7 +15,7 @@ export function SeacrchField() {
   return (
     <form onSubmit={handleSubmit} method="GET" action={`/search`}>
       <div className="relative">
-        <input name="q" placeholder="Search" className="pe-10" />
+        <input name="q" placeholder="Search" className="px-3 py-2 pe-10" />
         <SearchCheckIcon className="absolute right-3 top-1/2 size-5 -translate-y-1/2 transform text-muted-foreground" />
       </div>
     </form>
