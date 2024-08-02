@@ -1,7 +1,4 @@
 "use client";
-
-"use client";
-
 import { Session, User } from "lucia";
 import { createContext, useContext } from "react";
 

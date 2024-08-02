@@ -1,8 +1,5 @@
 import { PostEditor } from "@/components/posts/editor/PostEditor";
-import { Post } from "@/components/posts/Post";
-import { TrendsSideBar } from "@/components/TrendsSideBar";
-import prisma from "@/lib/prisma";
-import { postDataInclude } from "@/lib/types";
+import { TrendsSidebar } from "@/components/TrendsSideBar";
 import { ForYouFeed } from "./ForYouFeed";
 
 export default function Home() {
@@ -12,7 +9,7 @@ export default function Home() {
         <PostEditor />
         <ForYouFeed />
       </div>
-      <TrendsSideBar />
+      <TrendsSidebar />
     </main>
   );
 }
