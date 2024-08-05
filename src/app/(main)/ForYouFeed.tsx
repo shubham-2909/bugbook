@@ -45,7 +45,6 @@ export function ForYouFeed() {
       </p>
     );
   }
-
   return (
     <InfiniteScrollContainer
       className="space-y-5"
