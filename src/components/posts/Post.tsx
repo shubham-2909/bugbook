@@ -1,3 +1,4 @@
+"use client";
 import { PostData } from "@/lib/types";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import Link from "next/link";
@@ -8,6 +9,7 @@ import { Linkify } from "@/components/Linkify";
 import { UserTooltip } from "../UserTooltip";
 import { Media } from "@prisma/client";
 import Image from "next/image";
+import { LikesButton } from "./LikeButton";
 
 interface PostProps {
   post: PostData;
@@ -54,6 +56,13 @@ export function Post({ post }: PostProps) {
       {!!post.attachments.length && (
         <MediaPreviews attachments={post.attachments} />
       )}
+      <LikesButton
+        postId={post.id}
+        initialState={{
+          likes: post._count.likes,
+          isLikedByUser: post.likes.some((like) => like.userId === user.id),
+        }}
+      />
     </article>
   );
 }
