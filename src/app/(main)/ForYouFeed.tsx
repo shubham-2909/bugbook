@@ -34,9 +34,11 @@ export function ForYouFeed() {
   }
 
   if (status === "success" && !posts.length && !hasNextPage) {
-    <p className="text-center text-muted-foreground">
-      Uh Oh!! No one has posted anything
-    </p>;
+    return (
+      <p className="text-center text-muted-foreground">
+        Uh Oh!! No one has posted anything
+      </p>
+    );
   }
   if (status === "error") {
     return (
