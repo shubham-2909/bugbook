@@ -58,11 +58,29 @@ export function getCommentDataInclude(loggedInUserId: string) {
   } satisfies Prisma.CommentInclude;
 }
 
+export const NotificationsInclude = {
+  issuer: {
+    select: {
+      username: true,
+      displayName: true,
+      avatarUrl: true,
+    },
+  },
+  post: {
+    select: {
+      content: true,
+    },
+  },
+} satisfies Prisma.NotificationInclude;
 export type CommentData = Prisma.CommentGetPayload<{
   include: ReturnType<typeof getCommentDataInclude>;
 }>;
 export type PostData = Prisma.PostGetPayload<{
   include: ReturnType<typeof getPostDataInclude>;
+}>;
+
+export type NotificationData = Prisma.NotificationGetPayload<{
+  include: typeof NotificationsInclude;
 }>;
 
 export type UserData = Prisma.UserGetPayload<{
@@ -72,7 +90,10 @@ export interface PostsPage {
   posts: PostData[];
   nextCursor: string | null;
 }
-
+export interface NotificationsPage {
+  notifications: NotificationData[];
+  nextCursor: string | null;
+}
 export interface CommentsPage {
   comments: CommentData[];
   previousCursor: string | null;
@@ -90,4 +111,8 @@ export interface LikeInfo {
 
 export interface BookmarkInfo {
   isBookmarkedByUser: boolean;
+}
+
+export interface NotificationCountInfo {
+  unreadCount: number;
 }

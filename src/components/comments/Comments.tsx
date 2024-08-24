@@ -11,30 +11,24 @@ type Props = {
 };
 
 export function Comments({ post }: Props) {
-  const {
-    data,
-    fetchNextPage,
-    status,
-    isFetchingNextPage,
-    hasNextPage,
-    isFetching,
-  } = useInfiniteQuery({
-    queryKey: ["comments", post.id],
-    queryFn: ({ pageParam }) => {
-      return kyInstance
-        .get(
-          `/api/posts/${post.id}/comments`,
-          pageParam ? { searchParams: { cursor: pageParam } } : {},
-        )
-        .json<CommentsPage>();
-    },
-    initialPageParam: null as string | null,
-    getNextPageParam: (firstPage) => firstPage.previousCursor,
-    select: (data) => ({
-      pages: [...data.pages].reverse(),
-      pageParams: [...data.pageParams].reverse(),
-    }),
-  });
+  const { data, fetchNextPage, status, hasNextPage, isFetching } =
+    useInfiniteQuery({
+      queryKey: ["comments", post.id],
+      queryFn: ({ pageParam }) => {
+        return kyInstance
+          .get(
+            `/api/posts/${post.id}/comments`,
+            pageParam ? { searchParams: { cursor: pageParam } } : {},
+          )
+          .json<CommentsPage>();
+      },
+      initialPageParam: null as string | null,
+      getNextPageParam: (firstPage) => firstPage.previousCursor,
+      select: (data) => ({
+        pages: [...data.pages].reverse(),
+        pageParams: [...data.pageParams].reverse(),
+      }),
+    });
 
   const comments = data?.pages.flatMap((page) => page.comments) || [];
   return (
